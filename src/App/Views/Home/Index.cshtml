@@ -1,10 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Signature";
 }
 
 <canvas id="canvas"></canvas>
 
 <div class="row">
+    <div class="col-md-12">
+        <label class="w-100">User ID</label>
+        <label id="UserID"></label>
+    </div>
     <div class="col-md-12">
         <label class="w-100">Display Name</label>
         <label id="DisplayName"></label>
@@ -36,7 +40,10 @@
         canvas.setAttribute('height', window.innerHeight - $('#btn').outerHeight() - 10);
         signaturePad.clear();
         // Initializes a LIFF app
-        liff.init(function (data) { });
+        liff.init(function(data) {
+            var userId = data.context.userId;
+            $('#UserID').text(userId);
+        });
     });
 
     function onCancel() {
