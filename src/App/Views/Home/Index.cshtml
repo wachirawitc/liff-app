@@ -2,6 +2,8 @@
     ViewData["Title"] = "Home Page";
 }
 
+<canvas id="canvas"></canvas>
+
 <div class="row">
     <div class="col-md-12">
         <label class="w-100">Display Name</label>
@@ -10,18 +12,10 @@
 </div>
 
 <div class="row">
-    
-    <div class="col-md-12">
-        <canvas id="canvas"></canvas>
-    </div>
-
-</div>
-
-<div class="row">
-    <div class="col-md-6">
+    <div class="col-6">
         <button type="button" class="btn btn-danger btn-block">Register</button>
     </div>
-    <div class="col-md-6">
+    <div class="col-6">
         <button type="button" class="btn btn-danger btn-block">Cancel</button>
     </div>
 </div>
@@ -30,31 +24,31 @@
 
 @section Scripts{
 
-<script type="text/javascript">
-    var canvas = document.querySelector('#canvas');
+    <script type="text/javascript">
+        var canvas = document.querySelector('#canvas');
 
-    var signaturePad = new SignaturePad(canvas, {
-        backgroundColor: 'rgb(238,238,238)'
-    });
+        var signaturePad = new SignaturePad(canvas, {
+            backgroundColor: 'rgb(238,238,238)'
+        });
 
-    $(window).on('load', function () {
-        canvas.setAttribute('width', $('.container').width());
-        canvas.setAttribute('height', window.innerHeight - $('#btn').outerHeight() - 10);
-        signaturePad.clear();
-        // Initializes a LIFF app
-        liff.init(function (data) { });
+        $(window).on('load', function () {
+            canvas.setAttribute('width', $('.container').width());
+            canvas.setAttribute('height', window.innerHeight - $('#btn').outerHeight() - 10);
+            signaturePad.clear();
+            // Initializes a LIFF app
+            liff.init(function (data) { });
 
 
-        liff.getProfile()
-            .then(profile => {
-                var name = profile.displayName;
-                $('#DisplayName').text(name);
-            })
-            .catch((err) => {
-                console.log('error', err);
-            });
+            liff.getProfile()
+                .then(profile => {
+                    var name = profile.displayName;
+                    $('#DisplayName').text(name);
+                })
+                .catch((err) => {
+                    console.log('error', err);
+                });
 
-    });
-</script>
+        });
+    </script>
 
 }
