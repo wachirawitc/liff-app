@@ -2,7 +2,7 @@ image: microsoft/dotnet:latest
 
 stages:
     - build
-    - test
+    - package
 
 build:
     stage: build
@@ -12,7 +12,9 @@ build:
       paths:
         - bin/
 
-test:
-    stage: test
-    script: 
-        - "dotnet test"
+package_to_docker_image:
+    stage: package
+    script:
+        - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+        - docker build -f "src/App/Dockerfile" -t registry.gitlab.com/wachirawitc/liff-app .
+        - docker push registry.gitlab.com/wachirawitc/liff-app
