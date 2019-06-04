@@ -2,8 +2,31 @@
     ViewData["Title"] = "Home Page";
 }
 
-<canvas id="canvas"></canvas>
-<button id="btn" type="button" class="btn btn-primary btn-block">Share</button>
+<div class="row">
+    <div class="col-md-12">
+        <label class="w-100">Display Name</label>
+        <label id="DisplayName"></label>
+    </div>
+</div>
+
+<div class="row">
+    
+    <div class="col-md-12">
+        <canvas id="canvas"></canvas>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <button type="button" class="btn btn-danger btn-block">Register</button>
+    </div>
+    <div class="col-md-6">
+        <button type="button" class="btn btn-danger btn-block">Cancel</button>
+    </div>
+</div>
+
+
 
 @section Scripts{
 
@@ -20,6 +43,17 @@
         signaturePad.clear();
         // Initializes a LIFF app
         liff.init(function (data) { });
+
+
+        liff.getProfile()
+            .then(profile => {
+                var name = profile.displayName;
+                $('#DisplayName').text(name);
+            })
+            .catch((err) => {
+                console.log('error', err);
+            });
+
     });
 </script>
 
