@@ -16,7 +16,7 @@
         <button type="button" class="btn btn-danger btn-block">Register</button>
     </div>
     <div class="col-6">
-        <button type="button" class="btn btn-danger btn-block">Cancel</button>
+        <button onclick="onCancel()" type="button" class="btn btn-danger btn-block">Cancel</button>
     </div>
 </div>
 
@@ -24,31 +24,32 @@
 
 @section Scripts{
 
-    <script type="text/javascript">
-        var canvas = document.querySelector('#canvas');
+<script type="text/javascript">
+    var canvas = document.querySelector('#canvas');
 
-        var signaturePad = new SignaturePad(canvas, {
-            backgroundColor: 'rgb(238,238,238)'
-        });
+    var signaturePad = new SignaturePad(canvas, {
+        backgroundColor: 'rgb(238,238,238)'
+    });
 
-        $(window).on('load', function () {
-            canvas.setAttribute('width', $('.container').width());
-            canvas.setAttribute('height', window.innerHeight - $('#btn').outerHeight() - 10);
-            signaturePad.clear();
-            // Initializes a LIFF app
-            liff.init(function (data) { });
+    $(window).on('load', function () {
+        canvas.setAttribute('width', $('.container').width());
+        canvas.setAttribute('height', window.innerHeight - $('#btn').outerHeight() - 10);
+        signaturePad.clear();
+        // Initializes a LIFF app
+        liff.init(function (data) { });
+    });
 
+    function onCancel() {
+        liff.getProfile()
+            .then(profile => {
+                var name = profile.displayName;
+                $('#DisplayName').text(name);
+            })
+            .catch((err) => {
+                console.log('error', err);
+            });
+    }
 
-            liff.getProfile()
-                .then(profile => {
-                    var name = profile.displayName;
-                    $('#DisplayName').text(name);
-                })
-                .catch((err) => {
-                    console.log('error', err);
-                });
-
-        });
-    </script>
+</script>
 
 }
