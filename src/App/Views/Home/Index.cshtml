@@ -2,7 +2,25 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<canvas id="canvas"></canvas>
+<button id="btn" type="button" class="btn btn-primary btn-block">Share</button>
+
+@section Scripts{
+
+<script type="text/javascript">
+    var canvas = document.querySelector('#canvas');
+
+    var signaturePad = new SignaturePad(canvas, {
+        backgroundColor: 'rgb(238,238,238)'
+    });
+
+    $(window).on('load', function () {
+        canvas.setAttribute('width', $('.container').width());
+        canvas.setAttribute('height', window.innerHeight - $('#btn').outerHeight() - 10);
+        signaturePad.clear();
+        // Initializes a LIFF app
+        liff.init(function (data) { });
+    });
+</script>
+
+}
