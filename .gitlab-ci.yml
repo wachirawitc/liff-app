@@ -1,6 +1,4 @@
 image: microsoft/dotnet:latest
-services:
-  - docker:dind
 
 stages:
     - build
@@ -16,6 +14,9 @@ build:
 
 package_to_docker_image:
     stage: package
+    image: docker:latest
+    services:
+        - docker:dind
     script:
         - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
         - docker build -f "src/App/Dockerfile" -t registry.gitlab.com/wachirawitc/liff-app .
