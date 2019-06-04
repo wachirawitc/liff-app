@@ -1,4 +1,6 @@
 image: microsoft/dotnet:latest
+services:
+  - docker:dind
 
 stages:
     - build
