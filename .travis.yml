@@ -1,0 +1,6 @@
+language: csharp
+mono: none
+dotnet: 2.2
+solution: LiffApp.sln
+script:
+  - dotnet restore
